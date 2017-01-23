@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Kernel {
     @RequestMapping("/")
     private String index() {
-        return "index";
+        return "app";
     }
 }

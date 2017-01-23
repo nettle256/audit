@@ -1,0 +1,13 @@
+<div id="article">
+    <h3 ng-bind="title" class="title"></h3>
+    <div class="info">
+        发布日期：{{updated | date:'yyyy-MM-dd'}}
+    </div>
+    <hr />
+    <div class="content">
+        <p ng-bind-html="content"></p>
+        <img ng-repeat="pic in image" ng-src="{{imageUrl + pic}}"/>
+    </div>
+    <hr />
+    <button class="btn btn-default pull-right" ui-sref="articles({groupId: belong})">返回前页</button>
+</div>

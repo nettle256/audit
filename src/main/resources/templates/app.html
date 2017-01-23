@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Audit Bureau of Kaizhou District</title>
+    <div th:include="fragment/header :: lib"></div>
+</head>
+<body class="container" ng-app="auditApp" ng-controller="mainCtrl">
+    <div class="page-header">
+        <h1>Audit Bureau of Kaizhou District, Chongqing Municipality <small>Demo</small></h1>
+    </div>
+    <div class="page-body">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="index" ui-sref-active="true">网站首页</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">机构设置<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ui-sref="responsibility">职能职责</a></li>
+                                <li><a ui-sref="responsibility">领导信息</a></li>
+                                <li><a ui-sref="institution">机构信息</a></li>
+                            </ul>
+                        </li>
+                        <li ng-repeat="nav in navigations" ng-class="{true: 'dropdown'}[nav.isDropdown]">
+                            <a ng-if="!nav.isDropdown" ng-bind="nav.name" ui-sref="articles({groupId: nav.id})"></a>
+                            <a ng-if="nav.isDropdown" class="dropdown-toggle" data-toggle="dropdown">{{nav.name}} <span class="caret"></span></a>
+                            <ul ng-if="nav.isDropdown" class="dropdown-menu" role="menu">
+                                <li ng-repeat="subNav in nav.sub"><a href="#" ng-bind="subNav.name" ui-sref="articles({groupId: subNav.id})"></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a ui-sref="contact">互动交流</a>
+                        </li>
+                    </ul>
+
+                    <form name="searchForm" class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="keyword" placeholder="关键字" required="true"/>
+                        </div>
+                        <button class="btn btn-default" ng-click="gotoSearch()" ng-disabled="searchForm.$invalid">搜索</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div ui-view="" style="padding-bottom: 50px;"></div>
+    </div>
+    <footer>
+        <div th:include="fragment/footer :: lib"></div>
+        <div th:include="fragment/footer :: angularCtrl"></div>
+    </footer>
+</body>
+</html>
