@@ -16,6 +16,7 @@ auditApp
         $scope.navigations.forEach(function (nav) {
             nav.isDropdown = (nav.sub && nav.sub.length > 0);
         });
+        $scope.myInterval = 5000;
         $scope.keyword = '';
         $scope.gotoSearch = function () {
             $state.go('search', {keyword: $scope.keyword});
