@@ -11,17 +11,22 @@ auditApp
                 controller: 'indexCtrl'
             })
     }])
-    .controller('indexCtrl', function ($scope) {
-        $scope.news = audit_infomations;
-        $scope.slideApi = "/img/demo_img/";
-        $scope.slides = [{
-            imageUrl: '1.jpg',
-            text: '重庆市开州区审计局开展“大数据、巧审计”技术方法培训'
-        }, {
-            imageUrl: '2.jpg',
-            text: '开州区审计局：重点关注农村水库整治工程质量审计'
-        },  {
-            imageUrl: '3.jpg',
-            text: '进村入户　真心帮扶'
-        }];
+    .controller('indexCtrl', function ($scope, $http) {
+
+        $http
+            .get(['api', 'carousel'].join('/'))
+            .then(function (result) {
+                $scope.carousels = result.data.sort(function (a, b) {
+                    return a.index > b.index;
+                });
+            }, function (result) {
+            });
+
+        $http
+            .get(['api','news'].join('/'))
+            .then(function (result) {
+               $scope.news = result.data;
+            }, function () {
+
+            });
     });

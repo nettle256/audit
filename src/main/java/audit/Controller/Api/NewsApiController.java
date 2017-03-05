@@ -44,6 +44,17 @@ public class NewsApiController {
         return newsDTOList;
     }
 
+    @RequestMapping(value = "/theme/{id:[0-9]+}", method = RequestMethod.GET)
+    private @ResponseBody List<NewsDTO> getThemeNews(
+            @PathVariable(value="id") Long id
+    ) {
+        List<NewsDTO> newsDTOList = new ArrayList<NewsDTO>();
+        List<News> newsList = newsRepository.findByThemeAndDeleted(id, false);
+        for (News news: newsList)
+            newsDTOList.add(new NewsDTO(news));
+        return newsDTOList;
+    }
+
     @RequestMapping(value = "/{id:[0-9]+}", method = RequestMethod.GET)
     private ResponseEntity<NewsDTO> getSingleNews(
             @PathVariable(value="id") Long id

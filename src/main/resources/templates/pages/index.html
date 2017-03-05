@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-md-6 col-sm-12" style="padding: 0px;">
             <div uib-carousel="" active="active" interval="myInterval" no-transition="false" no-pause="true">
-                <div uib-slide="" ng-repeat="slide in slides track by $index" index="$index" style="height: 100%;">
-                    <img ng-src="{{slideApi + slide.imageUrl}}" style="margin:auto;" />
+                <div uib-slide="" ng-repeat="carousel in carousels track by $index" index="$index" style="height: 100%;">
+                    <img ng-src="{{carousel.imageUrl}}" style="margin:auto;" />
                     <div class="carousel-caption">
                         <!--<h4>Slide {{slide.id}}</h4>-->
-                        <p>{{slide.text}}</p>
+                        <p>{{carousel.text}}</p>
                     </div>
                 </div>
             </div>
@@ -28,12 +28,14 @@
                 <thead>
                 <tr>
                     <th>新闻标题</th>
+                    <th style="width: 150px">所属栏目</th>
                     <th style="width: 150px">发布时间</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="new in news" ui-sref="article({groupId: new.belong, id: new.id})">
                     <td ng-bind="new.title"></td>
+                    <td ng-bind="themeMap[new.theme].name"></td>
                     <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
                 </tr>
                 </tbody>

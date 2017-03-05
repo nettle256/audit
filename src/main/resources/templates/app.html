@@ -16,23 +16,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a ui-sref="index" ui-sref-active="true">网站首页</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">机构设置<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a ui-sref="responsibility">职能职责</a></li>
-                                <li><a ui-sref="leader">领导信息</a></li>
-                                <li><a ui-sref="institution">机构信息</a></li>
+                        <li ng-repeat="nav in themeTree" ng-class="{true: 'dropdown'}[nav.isFather]">
+                            <a ng-if="!nav.isFather" ng-bind="nav.name"></a>
+                            <a ng-if="nav.isFather" class="dropdown-toggle" data-toggle="dropdown">{{nav.name}}<span class="caret"></span></a>
+                            <ul ng-if="nav.isFather" class="dropdown-menu" role="menu">
+                                <li ng-repeat="subNav in nav.child"><a ng-bind="subNav.name"></a></li>
                             </ul>
-                        </li>
-                        <li ng-repeat="nav in navigations" ng-class="{true: 'dropdown'}[nav.isDropdown]">
-                            <a ng-if="!nav.isDropdown" ng-bind="nav.name" ui-sref="articles({groupId: nav.id})"></a>
-                            <a ng-if="nav.isDropdown" class="dropdown-toggle" data-toggle="dropdown">{{nav.name}} <span class="caret"></span></a>
-                            <ul ng-if="nav.isDropdown" class="dropdown-menu" role="menu">
-                                <li ng-repeat="subNav in nav.sub"><a href="#" ng-bind="subNav.name" ui-sref="articles({groupId: subNav.id})"></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a ui-sref="contact">互动交流</a>
                         </li>
                     </ul>
 
