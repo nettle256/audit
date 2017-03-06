@@ -11,6 +11,12 @@ auditApp
                 controller: 'searchCtrl'
             })
     }])
-    .controller('searchCtrl', function ($scope) {
-        $scope.news = audit_infomations;
+    .controller('searchCtrl', function ($scope, $http) {
+        $http
+            .get(['api', 'news'].join('/'))
+            .then(function (result) {
+                $scope.news = result.data;
+            }, function () {
+                
+            });
     });

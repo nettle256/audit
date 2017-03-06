@@ -1,0 +1,34 @@
+<div id="theme">
+
+    <h3 ng-bind="name" class="title"></h3>
+    <hr />
+
+    <!--模板-->
+    <div ng-if="module" ng-bind-html="sce.trustAsHtml(mod.content)">
+    </div>
+
+    <!--新闻-->
+    <div ng-if="!module">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>新闻标题</th>
+                            <th style="width: 150px">发布时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="new in news | orderBy:'-updated'" ui-sref="article({themeId: new.theme, id: new.id})">
+                            <td ng-bind="new.title"></td>
+                            <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

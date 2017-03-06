@@ -2,25 +2,25 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <title>Audit Bureau of Kaizhou District</title>
+    <title>开州区审计局</title>
     <div th:include="fragment/header :: lib"></div>
 </head>
 <body class="container" ng-app="auditApp" ng-controller="mainCtrl">
     <div class="page-header">
-        <h1>Audit Bureau of Kaizhou District, Chongqing Municipality <small>Demo</small></h1>
+        <img src="/static/img/header.jpg" />
     </div>
     <div class="page-body">
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a ui-sref="index" ui-sref-active="true">网站首页</a></li>
                         <li ng-repeat="nav in themeTree" ng-class="{true: 'dropdown'}[nav.isFather]">
-                            <a ng-if="!nav.isFather" ng-bind="nav.name"></a>
+                            <a ng-if="!nav.isFather" ng-bind="nav.name" ui-sref="theme({id:nav.id})"></a>
                             <a ng-if="nav.isFather" class="dropdown-toggle" data-toggle="dropdown">{{nav.name}}<span class="caret"></span></a>
                             <ul ng-if="nav.isFather" class="dropdown-menu" role="menu">
-                                <li ng-repeat="subNav in nav.child"><a ng-bind="subNav.name"></a></li>
+                                <li ng-repeat="subNav in nav.child"><a ng-bind="subNav.name" ui-sref="theme({id:subNav.id})"></a></li>
                             </ul>
                         </li>
                     </ul>

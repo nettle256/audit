@@ -1,45 +1,26 @@
 <div id="index">
     <div class="row">
-        <div class="col-md-6 col-sm-12" style="padding: 0px;">
-            <div uib-carousel="" active="active" interval="myInterval" no-transition="false" no-pause="true">
-                <div uib-slide="" ng-repeat="carousel in carousels track by $index" index="$index" style="height: 100%;">
-                    <img ng-src="{{carousel.imageUrl}}" style="margin:auto;" />
-                    <div class="carousel-caption">
-                        <!--<h4>Slide {{slide.id}}</h4>-->
-                        <p>{{carousel.text}}</p>
+        <div class="col-md-6 col-sm-12">
+            <div class="panel panel-default">
+                <div uib-carousel="" active="active" interval="myInterval" no-transition="false" no-pause="true">
+                    <div uib-slide="" ng-repeat="carousel in carousels track by $index" index="$index" style="height: 100%;">
+                        <img ng-src="{{carousel.imageUrl}}" style="margin:auto;" />
+                        <div class="carousel-caption">
+                            <!--<h4>Slide {{slide.id}}</h4>-->
+                            <p>{{carousel.text}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12" style="padding-right: 0px;">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    框体标题
-                </div>
-                <div class="panel-body" style="height: 274px;">
-                    内容
-                </div>
-            </div>
-        </div>
+        <news-panel class="col-md-6 col-sm-12" themes="[7,8]" theme-map="themeMap" limit="8"></news-panel>
     </div>
     <div class="row">
-        <div class="panel panel-default">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>新闻标题</th>
-                    <th style="width: 150px">所属栏目</th>
-                    <th style="width: 150px">发布时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="new in news" ui-sref="article({groupId: new.belong, id: new.id})">
-                    <td ng-bind="new.title"></td>
-                    <td ng-bind="themeMap[new.theme].name"></td>
-                    <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <news-panel class="col-md-6 col-sm-12" themes="[9,10]" theme-map="themeMap"></news-panel>
+        <news-panel class="col-md-6 col-sm-12" themes="[18,19]" theme-map="themeMap"></news-panel>
+    </div>
+    <div class="row">
+        <news-panel class="col-md-6 col-sm-12" themes="[20,21]" theme-map="themeMap"></news-panel>
+        <news-panel class="col-md-6 col-sm-12" themes="[22,23]" theme-map="themeMap"></news-panel>
     </div>
 </div>

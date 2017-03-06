@@ -1,0 +1,15 @@
+<div class="panel panel-success">
+    <div class="panel-heading" ng-bind="title" style="padding-left: 8px">
+    </div>
+    <table class="table">
+        <tbody>
+        <tr ng-repeat="new in news | orderBy:'-updated'">
+            <td>
+                <span ui-sref="theme({id: new.theme})">[{{themeMap[new.theme].name}}]</span>
+                <a ui-sref="article({themeId: new.theme, id: new.id})">{{new.title}}</a>
+            </td>
+            <td style="text-align: right">{{new.updated | date:'yyyy-MM-dd'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

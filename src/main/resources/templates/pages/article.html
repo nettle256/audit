@@ -6,8 +6,16 @@
     <hr />
     <div class="content">
         <p ng-bind-html="content"></p>
-        <img ng-repeat="pic in image" ng-src="{{imageUrl + pic}}"/>
+        <img ng-repeat="pic in imagesDTO" ng-src="{{'/photo/' + pic.uri}}"/>
+        <div class="attachments" ng-if="attachmentsDTO.length > 0">
+            <div class="attachment_header">附件列表：</div>
+            <div class="attachment_body">
+                <a ng-repeat="attachment in attachmentsDTO" href="/document/{{attachment.uri}}">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>  {{attachment.name}}
+                </a>
+            </div>
+        </div>
     </div>
     <hr />
-    <button class="btn btn-default pull-right" ui-sref="articles({groupId: belong})">返回前页</button>
+    <button class="btn btn-default pull-right" ng-click="goBack()">返回前页</button>
 </div>
