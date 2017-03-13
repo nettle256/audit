@@ -3,7 +3,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="panel panel-default">
                 <div uib-carousel="" active="active" interval="myInterval" no-transition="false" no-pause="true">
-                    <div uib-slide="" ng-repeat="carousel in carousels track by $index" index="$index" style="height: 100%;">
+                    <div uib-slide="" ng-repeat="carousel in carousels track by $index" index="$index" style="height: 100%;" ng-click="gotoNews(carousel.connect, carousel.theme)">
                         <img ng-src="{{carousel.imageUrl}}" style="margin:auto;" />
                         <div class="carousel-caption">
                             <!--<h4>Slide {{slide.id}}</h4>-->
@@ -14,6 +14,22 @@
             </div>
         </div>
         <news-panel class="col-md-6 col-sm-12" themes="[7,8]" theme-map="themeMap" limit="8"></news-panel>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="padding-left: 8px">
+                    审计风采
+                </div>
+                <div class="panel-body photos">
+                    <div class="viewport">
+                        <ul class="overview">
+                            <li ng-repeat="photo in photos"><a ng-href="{{photo.url}}"><img ng-src="{{photo.imageUrl}}"/></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <news-panel class="col-md-6 col-sm-12" themes="[9,10]" theme-map="themeMap"></news-panel>

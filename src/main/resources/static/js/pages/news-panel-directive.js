@@ -10,7 +10,7 @@ auditApp
             scope: {
                 themes: '=themes',
                 themeMap: '=themeMap',
-                limit: '=limit'
+                limit: '=?limit'
             },
             templateUrl: '/html/pages/newsPanel',
             link: function (scope, element, attrs) {
@@ -29,7 +29,7 @@ auditApp
                 $q.all(req)
                     .then(function (result) {
                         result.forEach(function (res) {
-                            console.log(res.data);
+                            // console.log(res.data);
                             scope.news = scope.news.concat(res.data);
                         });
                         if (scope.news.length > scope.limit)
@@ -37,10 +37,6 @@ auditApp
                     }, function (result) {
                         
                     });
-
-                scope.title = scope.themes.map(function (theme) {
-                    return '' + scope.themeMap[theme].name;
-                }).join(' | ');
             }
         }
     });

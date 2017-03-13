@@ -7,7 +7,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="new in news | filter:{title:keyword}" ui-sref="article({groupId: new.belong, id: new.id})">
+        <tr ng-repeat="new in news | filter:{title:keyword}" ui-sref="article({themeId: new.theme, id: new.id})">
             <td ng-bind="new.title"></td>
             <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
         </tr>

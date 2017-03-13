@@ -8,7 +8,7 @@ auditApp
             $urlRouterProvider.otherwise('/index');
         }
     ])
-    .controller('mainCtrl', function ($scope, $state, themeService) {
+    .controller('mainCtrl', function ($scope, $state, themeService, $http) {
 
         $scope.themeMap = {};
         themeService.getThemeTree().then(function (data) {
@@ -27,5 +27,27 @@ auditApp
         $scope.keyword = '';
         $scope.gotoSearch = function () {
             $state.go('search', {keyword: $scope.keyword});
-        }
+        };
+
+        $http
+            .get(['api', 'carousel'].join('/'))
+            .then(function (result) {
+                $scope.carousels = result.data.sort(function (a, b) {
+                    return a.index > b.index;
+                });
+            }, function (result) {
+            });
+
+        $http
+            .get(['api', 'photo'].join('/'))
+            .then(function (result) {
+                $scope.photos = result.data;
+                $scope.photos.forEach(function (photo) {
+                    if (photo.connect && photo.theme) {
+                        photo.url = '#!/theme/'+photo.theme+'/article/'+photo.connect;
+                    }   else
+                        photo.url = '';
+                })
+            }, function (result) {
+            });
     });

@@ -11,22 +11,23 @@ auditApp
                 controller: 'indexCtrl'
             })
     }])
-    .controller('indexCtrl', function ($scope, $http) {
+    .controller('indexCtrl', function ($scope, $http, $timeout, $state) {
 
-        $http
-            .get(['api', 'carousel'].join('/'))
-            .then(function (result) {
-                $scope.carousels = result.data.sort(function (a, b) {
-                    return a.index > b.index;
-                });
-            }, function (result) {
-            });
+        // $http
+        //     .get(['api','news'].join('/'))
+        //     .then(function (result) {
+        //        $scope.news = result.data;
+        //     }, function () {
+        //
+        //     });
 
-        $http
-            .get(['api','news'].join('/'))
-            .then(function (result) {
-               $scope.news = result.data;
-            }, function () {
+        $timeout(function () {
+            $('.photos').tinycarousel({ interval: true });
+        });
 
-            });
+        $scope.gotoNews = function (id, theme) {
+            console.log('click');
+            if (id != null && theme != null)
+                $state.go('article', {themeId: theme, id: id});
+        }
     });

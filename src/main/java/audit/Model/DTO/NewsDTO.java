@@ -18,6 +18,8 @@ public class NewsDTO {
     private String userName;
     private Boolean deleted = false;
     private Boolean published = false;
+    private Boolean useOuter = false;
+    private String outerUrl;
 
     NewsDTO() {};
 
@@ -31,6 +33,8 @@ public class NewsDTO {
         this.deleted = news.getDeleted();
         this.published = news.getPublished();
         this.userName = news.getUserName();
+        this.useOuter = news.getUseOuter();
+        this.outerUrl = news.getOuterUrl();
         this.content = null;
     }
 
@@ -44,6 +48,8 @@ public class NewsDTO {
         this.deleted = news.getDeleted();
         this.published = news.getPublished();
         this.userName = news.getUserName();
+        this.useOuter = news.getUseOuter();
+        this.outerUrl = news.getOuterUrl();
         this.content = article.getContent();
     }
 
@@ -125,5 +131,21 @@ public class NewsDTO {
 
     public void setPublished(Boolean published) {
         this.published = published;
+    }
+
+    public Boolean getUseOuter() {
+        return useOuter;
+    }
+
+    public void setUseOuter(Boolean useOuter) {
+        this.useOuter = useOuter;
+    }
+
+    public String getOuterUrl() {
+        return outerUrl;
+    }
+
+    public void setOuterUrl(String outerUrl) {
+        this.outerUrl = outerUrl;
     }
 }
