@@ -1,5 +1,5 @@
 <div class="panel panel-success">
-    <div class="panel-heading" style="padding-left: 8px">
+    <div class="panel-heading" style="padding-left: 8px;font-size: 1.3em;font-family: 'Microsoft Yahei';">
         <div ng-repeat="themeId in themes" style="display: inline-block">
             <span ng-if="$index > 0">&nbsp;|</span>
             <span ui-sref="theme({id: themeId})" style="cursor: pointer;">{{themeMap[themeId].name}}</span>
@@ -10,8 +10,8 @@
         <tr ng-repeat="new in news | orderBy:'-updated'">
             <td>
                 <span ui-sref="theme({id: new.theme})">[{{themeMap[new.theme].name}}]</span>
-                <a ng-if="!new.useOuter" ui-sref="article({themeId: new.theme, id: new.id})">{{new.title}}</a>
-                <a ng-if="new.useOuter" href="{{new.outerUrl}}" target="_blank">{{new.title}}</a>
+                <a ng-if="!new.useOuter" ui-sref="article({themeId: new.theme, id: new.id})" title="{{new.title}}">{{new.title | cut:true:27:' ...'}}</a>
+                <a ng-if="new.useOuter" href="{{new.outerUrl}}" target="_blank" title="{{new.title}}">{{new.title | cut:true:27:' ...'}}</a>
             </td>
             <td style="text-align: right">{{new.updated | date:'yyyy-MM-dd'}}</td>
         </tr>

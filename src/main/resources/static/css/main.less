@@ -1,3 +1,6 @@
+@nav-bar-color: #03A9F4;
+@nav-bar-text-color: #fff;
+
 .row {
 }
 
@@ -12,6 +15,22 @@
 
 .collapse li {
   cursor: pointer;
+}
+
+.navbar {
+  background-color: @nav-bar-color;
+  border-color: @nav-bar-color;
+  border-radius: 0 0 4px 4px;
+
+}
+.navbar .navbar-nav>li>a:hover, .navbar .navbar-nav>li>a:focus, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+  background-color: @nav-bar-color;
+}
+
+.navbar .navbar-nav>li>a {
+  color: @nav-bar-text-color;
+  font-size: 1.2em;
+  font-family: "Microsoft Yahei";
 }
 
 #index {

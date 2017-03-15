@@ -20,8 +20,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="new in news | orderBy:'-updated'" ui-sref="article({themeId: new.theme, id: new.id})">
-                            <td ng-bind="new.title"></td>
+                        <tr ng-repeat="new in news | orderBy:'-updated'">
+                            <td ng-if="!new.useOuter" title="{{new.title}}"><a ui-sref="article({themeId: new.theme, id: new.id})">{{new.title | cut:true:54:' ...'}}</a></td>
+                            <td ng-if="new.useOuter" title="{{new.title}}"><a href="{{new.outerUrl}}" target="_blank">{{new.title | cut:true:54:' ...'}}</a></td>
                             <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
                         </tr>
                         </tbody>
