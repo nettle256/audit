@@ -30,6 +30,8 @@
                 </div>
             </div>
         </div>
+        <ul uib-pagination="" items-per-page="20" total-items="totalItems" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="true"
+            ng-change="pageChanged(currentPage)" previous-text="前一页" next-text="下一页"></ul>
     </div>
 
 </div>

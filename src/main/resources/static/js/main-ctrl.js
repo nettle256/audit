@@ -26,7 +26,7 @@ auditApp
         $scope.myInterval = 5000;
         $scope.keyword = '';
         $scope.gotoSearch = function () {
-            $state.go('search', {keyword: $scope.keyword});
+            $state.go('search', {key: $scope.keyword});
         };
 
         $http

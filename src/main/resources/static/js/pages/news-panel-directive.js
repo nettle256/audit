@@ -30,7 +30,7 @@ auditApp
                     .then(function (result) {
                         result.forEach(function (res) {
                             // console.log(res.data);
-                            scope.news = scope.news.concat(res.data);
+                            scope.news = scope.news.concat(res.data.content);
                         });
                         if (scope.news.length > scope.limit)
                             scope.splice(scope.limit, scope.news.length - scope.limit);

@@ -7,11 +7,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="new in news | filter:{title:keyword} | filter:{deleted:false}">
-            <td ng-if="!new.useOuter" title="{{new.title}}"><a ui-sref="article({themeId: new.theme, id: new.id})">{{new.title | cut:true:54:' ...'}}</a></td>
-            <td ng-if="new.useOuter" title="{{new.title}}"><a href="{{new.outerUrl}}" target="_blank">{{new.title | cut:true:54:' ...'}}</a></td>
+        <tr ng-repeat="new in news">
+            <td ng-if="!new.useOuter" title="{{new.title}}">
+                <span ui-sref="theme({id: new.theme})">[{{themeMap[new.theme].name}}]</span><a href="#!/theme/{{new.theme}}/article/{{new.id}}" target="_blank">{{new.title | cut:true:54:' ...'}}</a></td>
+            <td ng-if="new.useOuter" title="{{new.title}}">
+                <span ui-sref="theme({id: new.theme})">[{{themeMap[new.theme].name}}]</span><a href="{{new.outerUrl}}" target="_blank">{{new.title | cut:true:54:' ...'}}</a></td>
             <td>{{new.updated | date:'yyyy-MM-dd'}}</td>
+        </tr>
+        <tr ng-if="!news.length">
+            <td colspan="3" class="search-info">{{key ? '没有符合要求的内容' : '请输入搜索关键字'}}</td>
         </tr>
         </tbody>
     </table>
+    <ul uib-pagination="" total-items="total" ng-model="currentPage" max-size="5" class="pagination-sm" items-per-page="20" boundary-link-numbers="true" rotate="true"
+        ng-if="key" ng-change="pageChanged(currentPage)" previous-text="前一页" next-text="下一页"></ul>
 </div>

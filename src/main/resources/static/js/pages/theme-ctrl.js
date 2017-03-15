@@ -19,7 +19,10 @@ auditApp
             $http
                 .get(['api', 'news', 'theme', $scope.id].join('/'))
                 .then(function (result) {
-                    $scope.news = result.data;
+                    $scope.news = result.data.content;
+                    $scope.currentPage = result.data.number + 1;
+                    $scope.totalItems = result.data.total;
+                    $scope.totalPages = result.data.totalPages;
                 }, function (result) {
 
                 });
@@ -32,4 +35,16 @@ auditApp
 
                 });
         }
+
+        $scope.pageChanged = function (idx) {
+            $http
+                .get(['api', 'news', 'theme', $scope.id].join('/') + '?page=' + (idx-1) )
+                .then(function (result) {
+                    $scope.news = result.data.content;
+                    $scope.currentPage = result.data.number + 1;
+                    $scope.totalItems = result.data.total;
+                    $scope.totalPages = result.data.totalPages;
+                }, function (result) {
+                })
+        };
     });

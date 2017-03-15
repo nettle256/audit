@@ -3,12 +3,16 @@ package audit.Controller.Api;
 import audit.Model.*;
 import audit.Model.DTO.MessageDTO;
 import audit.Model.DTO.NewsDTO;
+import audit.Model.DTO.NewsPageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,10 @@ import java.util.List;
 @RequestMapping("/api/news")
 public class NewsApiController {
 
+
+    @Value("${audit.pageSize}")
+    private int pageSize;
+
     @Autowired
     NewsRepository newsRepository;
 
@@ -27,12 +35,12 @@ public class NewsApiController {
     ArticleRepository articleRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    private @ResponseBody List<NewsDTO> getAllNews() {
-        List<NewsDTO> newsDTOList = new ArrayList<NewsDTO>();
-        List<News> newsList = newsRepository.findAll();
-        for (News news: newsList)
-            newsDTOList.add(new NewsDTO(news));
-        return newsDTOList;
+    private ResponseEntity<NewsPageDTO> getAllNews(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+    ) {
+        Page<News> newsPage = newsRepository.findAllByTitleContainingAndDeleted(keyword, false, new PageRequest(page, pageSize));
+        return new ResponseEntity<NewsPageDTO>(new NewsPageDTO(newsPage), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/trash", method = RequestMethod.GET)
@@ -45,14 +53,13 @@ public class NewsApiController {
     }
 
     @RequestMapping(value = "/theme/{id:[0-9]+}", method = RequestMethod.GET)
-    private @ResponseBody List<NewsDTO> getThemeNews(
+    private ResponseEntity<NewsPageDTO> getThemeNews(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
             @PathVariable(value="id") Long id
     ) {
-        List<NewsDTO> newsDTOList = new ArrayList<NewsDTO>();
-        List<News> newsList = newsRepository.findByThemeAndDeleted(id, false);
-        for (News news: newsList)
-            newsDTOList.add(new NewsDTO(news));
-        return newsDTOList;
+        Page<News> newsPage = newsRepository.findAllByTitleContainingAndThemeAndDeleted(keyword, id, false, new PageRequest(page, pageSize));
+        return new ResponseEntity<NewsPageDTO>(new NewsPageDTO(newsPage), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id:[0-9]+}", method = RequestMethod.GET)
